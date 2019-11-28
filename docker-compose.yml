@@ -1,0 +1,25 @@
+version: '2'
+
+services: 
+   uniweb:
+     build: 06 - Code/.
+     image: medtech/uniweb:latest
+     restart: always
+     volumes:
+      - "$PWD/06 - Code/Application:/usr/src/myapp"
+     networks:
+      - nginx_outside
+      - int
+     expose: 
+      - 5005
+   redis:
+     image: redis
+     restart: always
+     networks:
+      - int
+
+networks:
+   nginx_outside:
+     external: true
+   int:
+     driver: bridge
